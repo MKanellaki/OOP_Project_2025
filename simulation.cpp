@@ -33,7 +33,7 @@ class MovingCars : public MovingObjects{
         cout <<direction <<"\n"<<endl;
     };
     void describe()override{
-       cout <<"direction\n"<<endl;
+       cout <<"MovingCars direction\n"<<endl;
        cout <<direction <<"\n"<<endl;
     };
 };
@@ -47,18 +47,31 @@ MovingBikes(){
         if (f==2)direction="up";
         if (f==3)direction="down";
     };
+    void describe()override{
+       cout <<"MovingBikes direction\n"<<endl;
+       cout <<direction <<"\n"<<endl;
+    };
 };
 class StaticObjects : public WorldObject{
 
+};
+class StationaryVehicles : public StaticObjects{
+protected:
+public:
+void describe()override{
+       cout <<"StationaryVehicles \n"<<endl;
+    };
 };
 class TrafficSigns : public StaticObjects{
 protected:
 bool is_STOP;
 public:
 TrafficSigns(bool STOP):is_STOP(STOP){};
-};
-class STOP : public TrafficSigns{
-
+void describe()override{
+       cout <<"TrafficSigns \n"<<endl;
+       if(is_STOP)cout <<"STOP \n"<<endl;
+       if(!is_STOP)cout <<"NOT STOP \n"<<endl;
+    };
 };
 class TrafficLights : public StaticObjects{
 protected:
@@ -99,6 +112,12 @@ void new_cycle(){
         ticksYELLOW=0;
     };
 };
+void describe()override{
+       cout <<"TrafficLights \n"<<endl;
+       if(RED)cout <<"RED \n"<<endl;
+       if(YELLOW)cout <<"YELLOW \n"<<endl;
+       if(GREEN)cout <<"GREEN \n"<<endl;
+    };
 };
 int main(){
     srand(time(NULL));
@@ -114,16 +133,35 @@ int numMovingBikes = 4 ;
 int numParkedCars = 5 ;
 int numStopSigns = 2;
 int numTraficLights = 2 ;
- 
- 
 for(int i=0 ; i<numMovingCars ; i++){   
 int e1 =rand()%(40);
 int e2 =rand()%(40);
 GridWorld[e1][e2] = new MovingCars();
 };
+for(int i=0 ; i<numMovingBikes ; i++){   
+int e1 =rand()%(40);
+int e2 =rand()%(40);
+GridWorld[e1][e2] = new MovingBikes();
+};
+for(int i=0 ; i<numParkedCars ; i++){   
+int e1 =rand()%(40);
+int e2 =rand()%(40);
+GridWorld[e1][e2] = new StationaryVehicles();
+};
+for(int i=0 ; i<numStopSigns ; i++){   
+int e1 =rand()%(40);
+int e2 =rand()%(40);
+GridWorld[e1][e2] = new TrafficSigns(true);
+};
+for(int i=0 ; i<numTraficLights ; i++){   
+int e1 =rand()%(40);
+int e2 =rand()%(40);
+GridWorld[e1][e2] = new TrafficLights();
+};
 for(int i=0 ; i<40 ; i++){   
 for(int e=0 ; e<40 ; e++){   
     if(GridWorld[i][e]!=NULL){
+        cout <<i<<"    "<<e<<"\n"<<endl;
         GridWorld[i][e]->describe();//not finish 
     };
 };
