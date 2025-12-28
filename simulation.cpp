@@ -104,7 +104,11 @@ int main(){
     srand(time(NULL));
 //    40×40
 WorldObject* GridWorld[40][40];  
-
+for(int i=0 ; i<40 ; i++){   
+for(int e=0 ; e<40 ; e++){   
+GridWorld[i][e]=NULL;
+};
+};
 int numMovingCars = 3 ;
 int numMovingBikes = 4 ;
 int numParkedCars = 5 ;
@@ -119,7 +123,9 @@ GridWorld[e1][e2] = new MovingCars();
 };
 for(int i=0 ; i<40 ; i++){   
 for(int e=0 ; e<40 ; e++){   
-GridWorld[i][e]->describe();//not finish error
+    if(GridWorld[i][e]!=NULL){
+        GridWorld[i][e]->describe();//not finish 
+    };
 };
 };
 };
