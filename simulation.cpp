@@ -32,23 +32,31 @@ class MovingObjects : public WorldObject{
 protected:
 string direction;
 int speed;
+bool in;
 public:
+bool get_in(){
+        return in;
+    };
+    void not_in(){
+        in= false;
+    };
 string get_direction(){
         return direction;
     };
     void move(){
         int x=get_x_pos();
         int y=get_y_pos();
-        if (direction=="left")x=x+1;
-        if (direction=="right")x=x-1;
-        if (direction=="up")y=y+1;
-        if (direction=="down")y=y-1;
+        if (direction=="left")x=x+speed;
+        if (direction=="right")x=x-speed;
+        if (direction=="up")y=y+speed;
+        if (direction=="down")y=y-speed;
         add_pos(x,y);
     };
 }; 
 class MovingCars : public MovingObjects{
     public:
     MovingCars(){
+        in =true;
         add_glyph("C");
         speed=2;
         int f =rand()%(4);
@@ -66,6 +74,7 @@ class MovingCars : public MovingObjects{
 class MovingBikes : public MovingObjects{
     public:
 MovingBikes(){
+        in =true;
         add_glyph("B");
         speed=1;
         int f =rand()%(4);
@@ -174,11 +183,14 @@ cout <<"\n"<<endl;
 int main(){
     srand(time(NULL));
 //    40×40
-vector<WorldObject*> GridWorld[40][40];  
+int dimX = 10;
+int dimY = 10;
+vector<WorldObject*> GridWorld[dimX][dimY];  
+int simulationTicks= 5;
 /*
-for(int i=0 ; i<40 ; i++){   
-for(int e=0 ; e<40 ; e++){   
-GridWorld[i][e]=NULL;
+for(int i=0 ; i<dimX ; i++){   
+for(int e=0 ; e<dimY ; e++){   
+GridWorld[i][e].push_back(NULL);
 };
 };*/
 int numMovingCars = 3 ;
@@ -192,32 +204,32 @@ vector<StationaryVehicles*> StationaryVehicle;
 vector<TrafficSigns*> TrafficSign;
 vector<TrafficLights*> TrafficLight;
 for(int i=0 ; i<numMovingCars ; i++){   
-int e1 =rand()%(40);
-int e2 =rand()%(40);
+int e1 =rand()%(dimX);
+int e2 =rand()%(dimY);
 MovingCar.push_back(new MovingCars());
 MovingCar[i]->add_pos(e1,e2);
 };
 for(int i=0 ; i<numMovingBikes ; i++){   
-int e1 =rand()%(40);
-int e2 =rand()%(40);
+int e1 =rand()%(dimX);
+int e2 =rand()%(dimY);
 MovingBike.push_back(new MovingBikes());
 MovingBike[i]->add_pos(e1,e2);
 };
 for(int i=0 ; i<numParkedCars ; i++){   
-int e1 =rand()%(40);
-int e2 =rand()%(40);
+int e1 =rand()%(dimX);
+int e2 =rand()%(dimY);
 StationaryVehicle.push_back(new StationaryVehicles());
 StationaryVehicle[i]->add_pos(e1,e2);
 };
 for(int i=0 ; i<numStopSigns ; i++){   
-int e1 =rand()%(40);
-int e2 =rand()%(40);
+int e1 =rand()%(dimX);
+int e2 =rand()%(dimY);
 TrafficSign.push_back(new TrafficSigns(true));
 TrafficSign[i]->add_pos(e1,e2);
 };
 for(int i=0 ; i<numTraficLights ; i++){   
-int e1 =rand()%(40);
-int e2 =rand()%(40);
+int e1 =rand()%(dimX);
+int e2 =rand()%(dimY);
 TrafficLight.push_back(new TrafficLights());
 TrafficLight[i]->add_pos(e1,e2);
 };
@@ -239,20 +251,99 @@ for(int i=0 ; i<numTraficLights ; i++){
     GridWorld[TrafficLight[i]->get_x_pos()][TrafficLight[i]->get_y_pos()].push_back(TrafficLight[i]); 
 };
 
-for(int x=0;x<40;x++){
-for(int y=0;y<40;y++){
+for(int x=0;x<dimX;x++){
+for(int y=0;y<dimY;y++){
 if(GridWorld[x][y].size()==0)cout <<'_';
-if(GridWorld[x][y].size()>=2)cout <<"("<<endl;
+if(GridWorld[x][y].size()>=2)cout <<"(";
 for(int f=0;f<GridWorld[x][y].size();f++){
 cout <<(GridWorld[x][y])[f]->GET_glyph();
 };
-if(GridWorld[y][x].size()>=2)cout<<")"<<endl;
+if(GridWorld[x][y].size()>=2)cout<<")";
 };
 cout <<"\n"<<endl;
 };
+int size1;
+for(int Ticks=1 ; Ticks<simulationTicks ; Ticks++){
+ 
+for(int x=0;x<dimX;x++){
+for(int y=0;y<dimY;y++){
+size1 = GridWorld[x][y].size();
+for(int f=0;f<GridWorld[x][y].size();f++){
+GridWorld[x][y].pop_back();
+};
+};
+};
+cout <<"\n"<<endl;
+cout <<"\n"<<endl;
+for(int i=0 ; i<numMovingCars ; i++){
+    if(MovingCar[i]->get_in()){
+    MovingCar[i]->move();
+    if(MovingCar[i]->get_x_pos()>=dimX){
+        MovingCar[i]->not_in();
+    };
+    if(MovingCar[i]->get_y_pos() >=dimY){
+       MovingCar[i]->not_in();
+    };
+    if(MovingCar[i]->get_x_pos()<0){
+        MovingCar[i]->not_in();
+    };
+    if(MovingCar[i]->get_y_pos() <0){
+        MovingCar[i]->not_in();
+    };
+    if(MovingCar[i]->get_in()){
+    GridWorld[MovingCar[i]->get_x_pos()][MovingCar[i]->get_y_pos()].push_back(MovingCar[i]);
+    };
+};
+};
+for(int i=0 ; i<numMovingBikes ; i++){ 
+    if(MovingBike[i]->get_in()){
+   MovingBike[i]->move();
+    if(MovingBike[i]->get_x_pos()>=dimX){
+        MovingBike[i]->not_in();;
+    };
+    if(MovingBike[i]->get_y_pos() >=dimY){
+        MovingBike[i]->not_in();
+    };
+    if(MovingBike[i]->get_x_pos()<0){
+        MovingBike[i]->not_in();
+    };
+    if(MovingBike[i]->get_y_pos() <0){
+        MovingBike[i]->not_in();
+    };
+    if(MovingBike[i]->get_in()){
+    GridWorld[MovingBike[i]->get_x_pos()][MovingBike[i]->get_y_pos()].push_back(MovingBike[i]);
+    };
+};
+};
+for(int i=0 ; i<numParkedCars ; i++){
+    GridWorld[StationaryVehicle[i]->get_x_pos()][StationaryVehicle[i]->get_y_pos()].push_back(StationaryVehicle[i]);
+};
+for(int i=0 ; i<numStopSigns ; i++){ 
+    GridWorld[TrafficSign[i]->get_x_pos()][TrafficSign[i]->get_y_pos()].push_back(TrafficSign[i]);
+};
+for(int i=0 ; i<numTraficLights ; i++){
+    TrafficLight[i]->new_cycle();
+    GridWorld[TrafficLight[i]->get_x_pos()][TrafficLight[i]->get_y_pos()].push_back(TrafficLight[i]); 
+};
+///*
+for(int x=0;x<dimX;x++){
+for(int y=0;y<dimY;y++){
+if(GridWorld[x][y].size()==0)cout <<'_';
+if(GridWorld[x][y].size()>=2)cout <<"(";
+for(int f=0;f<GridWorld[x][y].size();f++){
+cout <<(GridWorld[x][y])[f]->GET_glyph();
+};
+if(GridWorld[x][y].size()>=2)cout<<")";
+};
+cout <<"\n"<<endl;
+};
+//*/
+};
+
+
 //map(GridWorld);
 
-/*
+/*//
 for(int i=0 ; i<40 ; i++){   
 for(int e=0 ; e<40 ; e++){   
     if(GridWorld[i][e]!=NULL){
