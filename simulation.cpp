@@ -183,8 +183,8 @@ cout <<"\n"<<endl;
 int main(){
     srand(time(NULL));
 //    40×40
-int dimX = 10;
-int dimY = 10;
+int dimX = 40;
+int dimY = 20;
 vector<WorldObject*> GridWorld[dimX][dimY];  
 int simulationTicks= 5;
 /*
@@ -251,8 +251,8 @@ for(int i=0 ; i<numTraficLights ; i++){
     GridWorld[TrafficLight[i]->get_x_pos()][TrafficLight[i]->get_y_pos()].push_back(TrafficLight[i]); 
 };
 
-for(int x=0;x<dimX;x++){
 for(int y=0;y<dimY;y++){
+for(int x=0;x<dimX;x++){
 if(GridWorld[x][y].size()==0)cout <<'_';
 if(GridWorld[x][y].size()>=2)cout <<"(";
 for(int f=0;f<GridWorld[x][y].size();f++){
@@ -260,7 +260,8 @@ cout <<(GridWorld[x][y])[f]->GET_glyph();
 };
 if(GridWorld[x][y].size()>=2)cout<<")";
 };
-cout <<"\n"<<endl;
+//cout <<"\n"<<endl;
+cout <<endl;
 };
 int size1;
 for(int Ticks=1 ; Ticks<simulationTicks ; Ticks++){
@@ -268,9 +269,10 @@ for(int Ticks=1 ; Ticks<simulationTicks ; Ticks++){
 for(int x=0;x<dimX;x++){
 for(int y=0;y<dimY;y++){
 size1 = GridWorld[x][y].size();
-for(int f=0;f<GridWorld[x][y].size();f++){
-GridWorld[x][y].pop_back();
-};
+//for(int f=0;f<GridWorld[x][y].size();f++){
+//GridWorld[x][y].pop_back();
+GridWorld[x][y].clear();
+//};
 };
 };
 cout <<"\n"<<endl;
@@ -326,8 +328,8 @@ for(int i=0 ; i<numTraficLights ; i++){
     GridWorld[TrafficLight[i]->get_x_pos()][TrafficLight[i]->get_y_pos()].push_back(TrafficLight[i]); 
 };
 ///*
-for(int x=0;x<dimX;x++){
 for(int y=0;y<dimY;y++){
+for(int x=0;x<dimX;x++){
 if(GridWorld[x][y].size()==0)cout <<'_';
 if(GridWorld[x][y].size()>=2)cout <<"(";
 for(int f=0;f<GridWorld[x][y].size();f++){
@@ -335,9 +337,11 @@ cout <<(GridWorld[x][y])[f]->GET_glyph();
 };
 if(GridWorld[x][y].size()>=2)cout<<")";
 };
-cout <<"\n"<<endl;
+//cout <<"\n"<<endl;
+cout <<endl;
 };
 //*/
+
 };
 
 
