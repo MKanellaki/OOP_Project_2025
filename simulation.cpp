@@ -1,8 +1,10 @@
+#include "include/simulation.h"
 #include <iostream>
 #include <cstring>
 #include <string>
 #include <vector>
 using namespace std;
+/*
 class WorldObject{
 protected:
 string ID;
@@ -180,6 +182,7 @@ cout <<"\n"<<endl;
 };
 };
 */
+
 int main(){
     srand(time(NULL));
 //    40×40
