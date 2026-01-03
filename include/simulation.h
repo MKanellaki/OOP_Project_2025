@@ -7,16 +7,18 @@
 #include <string>
 #include <vector>
 using namespace std;
+class ID_class{
+    public:
+   string ID_string;
+   int ID_int; 
+};
 class WorldObject{
 protected:
-string ID;
+ID_class ID;
 string glyph;
 int X;//οριζόντιος άξονας 
 int Y;//κάθετος άξονας
 public:
-void add_glyph(string x){
-   glyph = x;
-};
 string GET_glyph(){
    return glyph;
 };
@@ -61,7 +63,7 @@ class MovingCars : public MovingObjects{
     public:
     MovingCars(){
         in =true;
-        add_glyph("C");
+        glyph ="C";
         speed=2;
         int f =rand()%(4);
         if (f==0)direction="left";
@@ -79,7 +81,7 @@ class MovingBikes : public MovingObjects{
     public:
 MovingBikes(){
         in =true;
-        add_glyph("B");
+        glyph="B";
         speed=1;
         int f =rand()%(4);
         if (f==0)direction="left";
@@ -99,7 +101,7 @@ class StationaryVehicles : public StaticObjects{
 protected:
 public:
     StationaryVehicles(){
-        add_glyph("P");
+        glyph="P";
     };
 void describe()override{
        cout <<"StationaryVehicles \n"<<endl;
@@ -110,7 +112,7 @@ protected:
 bool is_STOP;
 public:
 TrafficSigns(bool STOP):is_STOP(STOP){
-    add_glyph("S");
+    glyph="S";
 };
 void describe()override{
        cout <<"TrafficSigns \n"<<endl;
@@ -128,14 +130,14 @@ int ticksYELLOW;
 int ticksGREEN;
 public:
 TrafficLights():RED(true),YELLOW(false),GREEN(false),ticksRED(1),ticksYELLOW(0),ticksGREEN(0){
-    add_glyph("R");
+    glyph="R";
 };
 void new_cycle(){
     if(RED)ticksRED++;
     if(YELLOW)ticksYELLOW++;
     if(GREEN)ticksGREEN++;
     if(ticksRED>4){
-        add_glyph("G");
+        glyph="G";
         GREEN=true;
         YELLOW=false;
         RED=false;
@@ -144,7 +146,7 @@ void new_cycle(){
         ticksYELLOW=0;
     };
     if(ticksGREEN>8){
-        add_glyph("Y");
+        glyph="Y";
         YELLOW=true;
         GREEN=false;
         RED=false;
@@ -153,7 +155,7 @@ void new_cycle(){
         ticksYELLOW=1;
     };
     if(ticksYELLOW>2){
-        add_glyph("R");
+        glyph="R";
         RED=true;
         GREEN=false;
         YELLOW=false;
