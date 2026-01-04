@@ -60,10 +60,15 @@ string get_direction(){
     };
 }; 
 class MovingCars : public MovingObjects{
+    protected:
+    static int MovingCarscount;
     public:
     MovingCars(){
+        MovingCarscount++;
         in =true;
         glyph ="C";
+        ID.ID_string="MovingCar:";
+        ID.ID_int=MovingCarscount;
         speed=2;
         int f =rand()%(4);
         if (f==0)direction="left";
@@ -77,11 +82,17 @@ class MovingCars : public MovingObjects{
        cout <<direction <<"\n"<<endl;
     };
 };
+int MovingCars::MovingCarscount=0;
 class MovingBikes : public MovingObjects{
+    protected:
+    static int MovingBikescount;
     public:
 MovingBikes(){
+        MovingBikescount++;
         in =true;
         glyph="B";
+        ID.ID_string="MovingBike:";
+        ID.ID_int=MovingBikescount;
         speed=1;
         int f =rand()%(4);
         if (f==0)direction="left";
@@ -94,25 +105,34 @@ MovingBikes(){
        cout <<direction <<"\n"<<endl;
     };
 };
+int MovingBikes::MovingBikescount=0;
 class StaticObjects : public WorldObject{
-
 };
 class StationaryVehicles : public StaticObjects{
 protected:
+    static int ParkedCarcount;
 public:
     StationaryVehicles(){
+        ParkedCarcount++;
         glyph="P";
+        ID.ID_string="ParkedCar:";
+        ID.ID_int=ParkedCarcount;
     };
 void describe()override{
        cout <<"StationaryVehicles \n"<<endl;
     };
 };
+int StationaryVehicles::ParkedCarcount=0;
 class TrafficSigns : public StaticObjects{
 protected:
 bool is_STOP;
+static int TrafficSignsSTOPcount;
 public:
 TrafficSigns(bool STOP):is_STOP(STOP){
+    TrafficSignsSTOPcount++;
     glyph="S";
+    ID.ID_string="TrafficSignStop:";
+    ID.ID_int=TrafficSignsSTOPcount;
 };
 void describe()override{
        cout <<"TrafficSigns \n"<<endl;
@@ -120,8 +140,10 @@ void describe()override{
        if(!is_STOP)cout <<"NOT STOP \n"<<endl;
     };
 };
+int TrafficSigns::TrafficSignsSTOPcount=0;
 class TrafficLights : public StaticObjects{
 protected:
+static int TrafficLightscount;
 bool RED;
 bool YELLOW;
 bool GREEN;
@@ -130,7 +152,10 @@ int ticksYELLOW;
 int ticksGREEN;
 public:
 TrafficLights():RED(true),YELLOW(false),GREEN(false),ticksRED(1),ticksYELLOW(0),ticksGREEN(0){
+    TrafficLightscount++;
     glyph="R";
+    ID.ID_string="TrafficLights:";
+    ID.ID_int=TrafficLightscount;
 };
 void new_cycle(){
     if(RED)ticksRED++;
@@ -171,4 +196,5 @@ void describe()override{
        if(GREEN)cout <<"GREEN \n"<<endl;
     };
 };
+int TrafficLights::TrafficLightscount=0;
 #endif
