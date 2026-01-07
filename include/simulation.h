@@ -1,6 +1,6 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
-
+#include "sensorReading.h"
 #include <tuple>
 #include <iostream>
 #include <cstring>
@@ -17,7 +17,8 @@ protected:
 ID_class ID;
 string glyph;
 int X;//οριζόντιος άξονας 
-int Y;//κάθετος άξονας
+int Y;//κάθ ετος άξονας
+ObjectType Type;
 public:
 string GET_glyph(){
    return glyph;
@@ -32,6 +33,15 @@ int get_x_pos(){
 };
 int get_y_pos(){
     return Y;
+};
+string getID(){
+    return ID.ID_string;
+};
+tuple<int, int> getPosition(){
+    return make_tuple(X,Y);
+};
+ObjectType getType(){
+return Type;
 };
 };
 class MovingObjects : public WorldObject{
@@ -68,6 +78,7 @@ class MovingCars : public MovingObjects{
         in =true;
         glyph ="C";
         ID.ID_string="MovingCar:";
+        Type=ObjectType::MOVING_CAR ;
         ID.ID_int=MovingCarscount;
         speed=2;
         int f =rand()%(4);
@@ -92,6 +103,7 @@ MovingBikes(){
         in =true;
         glyph="B";
         ID.ID_string="MovingBike:";
+        Type=ObjectType::MOVING_BIKE;
         ID.ID_int=MovingBikescount;
         speed=1;
         int f =rand()%(4);
@@ -116,6 +128,7 @@ public:
         ParkedCarcount++;
         glyph="P";
         ID.ID_string="ParkedCar:";
+        Type=ObjectType::PARKED_CAR;
         ID.ID_int=ParkedCarcount;
     };
 void describe()override{
@@ -132,6 +145,7 @@ TrafficSigns(bool STOP):is_STOP(STOP){
     TrafficSignsSTOPcount++;
     glyph="S";
     ID.ID_string="TrafficSignStop:";
+    Type=ObjectType::STOP_SIGN;
     ID.ID_int=TrafficSignsSTOPcount;
 };
 void describe()override{
@@ -155,6 +169,7 @@ TrafficLights():RED(true),YELLOW(false),GREEN(false),ticksRED(1),ticksYELLOW(0),
     TrafficLightscount++;
     glyph="R";
     ID.ID_string="TrafficLights:";
+    Type=ObjectType::TRAFFIC_LIGHT;
     ID.ID_int=TrafficLightscount;
 };
 void new_cycle(){
