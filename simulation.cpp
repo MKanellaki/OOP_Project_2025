@@ -148,7 +148,7 @@ for(int i=0 ; i<numTraficLights ; i++){
 ///*
 for(int y=0;y<dimY;y++){
 for(int x=0;x<dimX;x++){
-if(GridWorld[x][y].size()==0)cout <<'_';
+if(GridWorld[x][y].size()==0)cout <<'.';
 if(GridWorld[x][y].size()>=2)cout <<"(";
 for(int f=0;f<GridWorld[x][y].size();f++){
 cout <<(GridWorld[x][y])[f]->GET_glyph();
