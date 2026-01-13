@@ -158,14 +158,9 @@ int TrafficSigns::TrafficSignsSTOPcount=0;
 class TrafficLights : public StaticObjects{
 protected:
 static int TrafficLightscount;
-bool RED;
-bool YELLOW;
-bool GREEN;
-int ticksRED;
-int ticksYELLOW;
-int ticksGREEN;
+int ticks;
 public:
-TrafficLights():RED(true),YELLOW(false),GREEN(false),ticksRED(1),ticksYELLOW(0),ticksGREEN(0){
+TrafficLights():ticks(1){
     TrafficLightscount++;
     glyph="R";
     ID.ID_string="TrafficLights:";
@@ -173,42 +168,25 @@ TrafficLights():RED(true),YELLOW(false),GREEN(false),ticksRED(1),ticksYELLOW(0),
     ID.ID_int=TrafficLightscount;
 };
 void new_cycle(){
-    if(RED)ticksRED++;
-    if(YELLOW)ticksYELLOW++;
-    if(GREEN)ticksGREEN++;
-    if(ticksRED>4){
+    ticks++;
+    if((glyph=="R")&&(ticks>4)){
         glyph="G";
-        GREEN=true;
-        YELLOW=false;
-        RED=false;
-        ticksGREEN=1;
-        ticksRED=0;
-        ticksYELLOW=0;
+        ticks=1;
     };
-    if(ticksGREEN>8){
+    if((glyph=="G")&&(ticks>8)){
         glyph="Y";
-        YELLOW=true;
-        GREEN=false;
-        RED=false;
-        ticksGREEN=0;
-        ticksRED=0;
-        ticksYELLOW=1;
+        ticks=1;
     };
-    if(ticksYELLOW>2){
+    if((glyph=="Y")&&(ticks>2)){
         glyph="R";
-        RED=true;
-        GREEN=false;
-        YELLOW=false;
-        ticksGREEN=0;
-        ticksRED=1;
-        ticksYELLOW=0;
+        ticks=0;
     };
 };
 void describe()override{
        cout <<"TrafficLights \n"<<endl;
-       if(RED)cout <<"RED \n"<<endl;
-       if(YELLOW)cout <<"YELLOW \n"<<endl;
-       if(GREEN)cout <<"GREEN \n"<<endl;
+       if(glyph=="R")cout <<"RED \n"<<endl;
+       if(glyph=="Y")cout <<"YELLOW \n"<<endl;
+       if(glyph=="G")cout <<"GREEN \n"<<endl;
     };
 };
 int TrafficLights::TrafficLightscount=0;
