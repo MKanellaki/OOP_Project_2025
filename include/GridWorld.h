@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 using namespace std;
-class GridWorld_class{
+class GridWorld{
 protected:
     int dimX ;
     int dimY ; 
@@ -25,7 +25,7 @@ protected:
     vector<TrafficSigns*> TrafficSign;
     vector<TrafficLights*> TrafficLight;
 public:
-    GridWorld_class():dimX(40),dimY(40),simulationTicks(100),numMovingCars(3),numMovingBikes(4),
+    GridWorld():dimX(40),dimY(40),simulationTicks(100),numMovingCars(3),numMovingBikes(4),
     numParkedCars(5),numStopSigns(2),numTraficLights(2),seed(time(NULL)){
     }; 
     int get_seed(){
@@ -52,7 +52,7 @@ public:
     void set_numMovingBikes(int NEWnumMovingBikes){
         numMovingBikes = NEWnumMovingBikes;
     };
-    void set_numMovingBikes(int NEWnumParkedCars){
+    void set_numParkedCars(int NEWnumParkedCars){
         numParkedCars = NEWnumParkedCars;
     };
     void set_numStopSigns(int NEWnumStopSigns){
@@ -112,9 +112,9 @@ public:
             GridWorld[TrafficLight[i]->get_x_pos()][TrafficLight[i]->get_y_pos()].push_back(TrafficLight[i]); 
         };
         
-        for(int y=0;y<dimY;y++){
+        for(int y=dimY-1;y>=0;y--){
             for(int x=0;x<dimX;x++){
-                if(!((get<0>(Self_Driving_Car_pos)= dimX)&&(get<1>(Self_Driving_Car_pos)= dimY))){
+                if(!((get<0>(Self_Driving_Car_pos)==x)&&(get<1>(Self_Driving_Car_pos)==y))){
                 if(GridWorld[x][y].size()==0)cout <<'.';
                 if(GridWorld[x][y].size()>=2)cout <<"(";
                 for(int f=0;f<GridWorld[x][y].size();f++){
@@ -122,7 +122,7 @@ public:
                 };
                 if(GridWorld[x][y].size()>=2)cout<<")";
                 };
-                if(((get<0>(Self_Driving_Car_pos)= dimX)&&(get<1>(Self_Driving_Car_pos)= dimY))){
+                if(((get<0>(Self_Driving_Car_pos)==x)&&(get<1>(Self_Driving_Car_pos)==y))){
                 if(GridWorld[x][y].size()>=1)cout <<"(";
                  cout <<Self_Driving_Car_glyph;
                 for(int f=0;f<GridWorld[x][y].size();f++){
@@ -188,9 +188,9 @@ public:
         TrafficLight[i]->new_cycle();
         GridWorld[TrafficLight[i]->get_x_pos()][TrafficLight[i]->get_y_pos()].push_back(TrafficLight[i]); 
     };
-    for(int y=0;y<dimY;y++){
+    for(int y=dimY-1;y>=0;y--){
         for(int x=0;x<dimX;x++){
-            if(!((get<0>(Self_Driving_Car_pos)= dimX)&&(get<1>(Self_Driving_Car_pos)= dimY))){
+            if(!((get<0>(Self_Driving_Car_pos)==x)&&(get<1>(Self_Driving_Car_pos)==y))){
             if(GridWorld[x][y].size()==0)cout <<'.';
             if(GridWorld[x][y].size()>=2)cout <<"(";
             for(int f=0;f<GridWorld[x][y].size();f++){
@@ -198,7 +198,7 @@ public:
             };
             if(GridWorld[x][y].size()>=2)cout<<")";
             };
-            if(((get<0>(Self_Driving_Car_pos)= dimX)&&(get<1>(Self_Driving_Car_pos)= dimY))){
+            if((get<0>(Self_Driving_Car_pos)==x)&&(get<1>(Self_Driving_Car_pos)==y)){
             if(GridWorld[x][y].size()>=1)cout <<"(";
             cout <<Self_Driving_Car_glyph;
             for(int f=0;f<GridWorld[x][y].size();f++){
@@ -229,7 +229,7 @@ vector<WorldObject*> get_GridWorld(){
         };
         return GridWorld;
     };
-    ~GridWorld_class(){
+    ~GridWorld(){
         for(int i=0 ; i<numMovingCars ; i++){
             delete MovingCar[i];
         };
