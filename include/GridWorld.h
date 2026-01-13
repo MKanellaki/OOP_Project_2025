@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 using namespace std;
-class GridWorld{
+class GridWorld_class{
 protected:
     int dimX ;
     int dimY ; 
@@ -25,7 +25,7 @@ protected:
     vector<TrafficSigns*> TrafficSign;
     vector<TrafficLights*> TrafficLight;
 public:
-    GridWorld():dimX(40),dimY(40),simulationTicks(100),numMovingCars(3),numMovingBikes(4),
+    GridWorld_class():dimX(40),dimY(40),simulationTicks(100),numMovingCars(3),numMovingBikes(4),
     numParkedCars(5),numStopSigns(2),numTraficLights(2),seed(time(NULL)){
     }; 
     int get_seed(){
@@ -210,5 +210,42 @@ public:
         cout <<endl;
     };
     };
+vector<WorldObject*> get_GridWorld(){
+        vector<WorldObject*> GridWorld;
+        for(int i=0 ; i<numMovingCars ; i++){
+            if(MovingCar[i]->get_in())GridWorld.push_back(MovingCar[i]);
+        };
+        for(int i=0 ; i<numMovingBikes ; i++){ 
+           if(MovingBike[i]->get_in())GridWorld.push_back(MovingBike[i]);
+        };
+        for(int i=0 ; i<numParkedCars ; i++){
+            GridWorld.push_back(StationaryVehicle[i]);
+        };
+        for(int i=0 ; i<numStopSigns ; i++){ 
+            GridWorld.push_back(TrafficSign[i]);
+        };
+        for(int i=0 ; i<numTraficLights ; i++){
+            GridWorld.push_back(TrafficLight[i]); 
+        };
+        return GridWorld;
+    };
+    ~GridWorld_class(){
+        for(int i=0 ; i<numMovingCars ; i++){
+            delete MovingCar[i];
+        };
+        for(int i=0 ; i<numMovingBikes ; i++){
+            delete MovingBike[i];
+        };
+        for(int i=0 ; i<numParkedCars ; i++){
+            delete StationaryVehicle[i];
+        };
+        for(int i=0 ; i<numStopSigns ; i++){   
+            delete TrafficSign[i];
+        };
+        for(int i=0 ; i<numTraficLights ; i++){
+            delete TrafficLight[i];
+        };
+    };
 };
+
 #endif
