@@ -1,10 +1,5 @@
-#include "include/simulation.h"
 #include "include/GridWorld.h"
 #include "src/GridWorld.cpp"
-#include <iostream>
-#include <cstring>
-#include <string>
-#include <vector>
 using namespace std;
 int main(){
 GridWorld World;
