@@ -1,12 +1,11 @@
 #ifndef GRIDWORLD_H
 #define GRIDWORLD_H
-#include "simulation.h"
-#include "sensorReading.h"
-#include <tuple>
-#include <iostream>
-#include <cstring>
-#include <string>
-#include <vector>
+#include "TrafficLights.h"
+#include "StationaryVehicles.h"
+#include "TrafficSigns.h"
+#include "MovingBikes.h"
+#include "MovingCars.h"
+#include "MovingCars.h"
 using namespace std;
 class GridWorld{
 protected:
