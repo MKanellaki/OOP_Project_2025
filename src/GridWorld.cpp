@@ -29,6 +29,9 @@
     void GridWorld::set_numStopSigns(int NEWnumStopSigns){
         numStopSigns = NEWnumStopSigns;
     };
+    void GridWorld::set_numSigns(int NEWnumSigns){
+        numSigns = NEWnumSigns;
+    };
     void GridWorld::set_numTraficLights(int NEWnumTraficLights){
         numTraficLights = NEWnumTraficLights;
     };
@@ -58,6 +61,12 @@ void GridWorld::create_GridWorld(){
             TrafficSign.push_back(new TrafficSigns(true));
             TrafficSign[i]->add_pos(e1,e2);
         };
+        for(int i=numStopSigns ; i<numSigns+numStopSigns ; i++){
+            int e1 =rand()%(dimX);
+            int e2 =rand()%(dimY);
+            TrafficSign.push_back(new TrafficSigns(false));
+            TrafficSign[i]->add_pos(e1,e2);
+        };
         for(int i=0 ; i<numTraficLights ; i++){   
             int e1 =rand()%(dimX);
             int e2 =rand()%(dimY);
@@ -76,7 +85,7 @@ void GridWorld::first_tick(tuple<int, int> Self_Driving_Car_pos,string Self_Driv
         for(int i=0 ; i<numParkedCars ; i++){
             GridWorld[StationaryVehicle[i]->get_x_pos()][StationaryVehicle[i]->get_y_pos()].push_back(StationaryVehicle[i]);
         };
-        for(int i=0 ; i<numStopSigns ; i++){ 
+        for(int i=0 ; i<numStopSigns+numSigns ; i++){ 
             GridWorld[TrafficSign[i]->get_x_pos()][TrafficSign[i]->get_y_pos()].push_back(TrafficSign[i]);
         };
         for(int i=0 ; i<numTraficLights ; i++){
@@ -152,7 +161,7 @@ void GridWorld::NEW_tick(tuple<int, int> Self_Driving_Car_pos,string Self_Drivin
     for(int i=0 ; i<numParkedCars ; i++){
         GridWorld[StationaryVehicle[i]->get_x_pos()][StationaryVehicle[i]->get_y_pos()].push_back(StationaryVehicle[i]);
     };
-    for(int i=0 ; i<numStopSigns ; i++){ 
+    for(int i=0 ; i<numStopSigns+numSigns ; i++){ 
         GridWorld[TrafficSign[i]->get_x_pos()][TrafficSign[i]->get_y_pos()].push_back(TrafficSign[i]);
     };
     for(int i=0 ; i<numTraficLights ; i++){
@@ -192,7 +201,7 @@ vector<WorldObject*> GridWorld::get_GridWorld(){
         for(int i=0 ; i<numParkedCars ; i++){
             GridWorld.push_back(StationaryVehicle[i]);
         };
-        for(int i=0 ; i<numStopSigns ; i++){ 
+        for(int i=0 ; i<numStopSigns+numSigns ; i++){ 
             GridWorld.push_back(TrafficSign[i]);
         };
         for(int i=0 ; i<numTraficLights ; i++){
@@ -210,7 +219,7 @@ GridWorld::~GridWorld(){
         for(int i=0 ; i<numParkedCars ; i++){
             delete StationaryVehicle[i];
         };
-        for(int i=0 ; i<numStopSigns ; i++){   
+        for(int i=0 ; i<numStopSigns+numSigns ; i++){   
             delete TrafficSign[i];
         };
         for(int i=0 ; i<numTraficLights ; i++){
