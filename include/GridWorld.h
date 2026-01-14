@@ -26,10 +26,10 @@ protected:
     vector<TrafficLights*> TrafficLight;
 public:
     GridWorld():dimX(40),dimY(40),simulationTicks(100),numMovingCars(3),numMovingBikes(4),
-    numParkedCars(5),numStopSigns(2),numSigns(2),numTraficLights(2),seed(time(NULL)){
-    }; 
-    int get_seed(); 
-    void set_seed(int NEWseed);
+    numParkedCars(5),numStopSigns(2),numSigns(2),numTraficLights(2),seed(time(NULL)){};
+    // It setups the variables with the default ones
+    int get_seed(); //Every get_.... return the corresponding variable
+    void set_seed(int NEWseed);//Every set_.... changes the corresponding variable
     void set_dimX(int NEWdimX);
     void set_dimY(int NEWdimY);
     void set_simulationTicks(int NEWsimulationTicks);
@@ -40,10 +40,14 @@ public:
     void set_numStopSigns(int NEWnumStopSigns);
     void set_numSigns(int NEWnumSigns);
     void set_numTraficLights(int NEWnumTraficLights);
-    void create_GridWorld();
+    void create_GridWorld();//must be called after the sets (if used) and before the
+    // (first_tick,NEW_tick,get_GridWorld) so that it can set up everything
     void first_tick(tuple<int, int> Self_Driving_Car_pos,string Self_Driving_Car_glyph);
+    // must be called for the first tick(print the world)
     void NEW_tick(tuple<int, int> Self_Driving_Car_pos,string Self_Driving_Car_glyph);
+    //it’s called for every other tick except the first one (print the world)
     vector<WorldObject*> get_GridWorld();
+    //it returns a vector with all the Objects
     ~GridWorld();
 };
 
