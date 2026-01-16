@@ -238,6 +238,121 @@ vector<WorldObject*> GridWorld::get_GridWorld()const{
 
 
     };
+    void GridWorld::visualization_pov_front(tuple<int, int> Self_Driving_Car_pos,string Self_Driving_Car_glyph,Direction direction){
+                vector<WorldObject*> GridWorld[dimX][dimY];
+        for(int i=0 ; i<numMovingCars ; i++){
+            if(MovingCar[i]->get_in())GridWorld[MovingCar[i]->get_x_pos()][MovingCar[i]->get_y_pos()].push_back(MovingCar[i]);
+        };
+        for(int i=0 ; i<numMovingBikes ; i++){ 
+            if(MovingBike[i]->get_in())GridWorld[MovingBike[i]->get_x_pos()][MovingBike[i]->get_y_pos()].push_back(MovingBike[i]);
+        };
+        for(int i=0 ; i<numParkedCars ; i++){
+            GridWorld[StationaryVehicle[i]->get_x_pos()][StationaryVehicle[i]->get_y_pos()].push_back(StationaryVehicle[i]);
+        };
+        for(int i=0 ; i<numStopSigns+numSigns ; i++){ 
+            GridWorld[TrafficSign[i]->get_x_pos()][TrafficSign[i]->get_y_pos()].push_back(TrafficSign[i]);
+        };
+        for(int i=0 ; i<numTraficLights ; i++){
+            GridWorld[TrafficLight[i]->get_x_pos()][TrafficLight[i]->get_y_pos()].push_back(TrafficLight[i]); 
+        };
+         for(int x=-1;x<dimX+1;x++){
+            if(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)-dimY)<= 12){
+                if(direction== Direction::NORTH){
+                    if((get<0>(Self_Driving_Car_pos)==x))cout <<"X";
+                    if(!(get<0>(Self_Driving_Car_pos)==x))cout <<" ";
+                };
+                if(direction== Direction::EAST){cout <<" ";};
+                if(direction== Direction::WEST){cout <<" ";};
+                if(direction== Direction::SOUTH){cout <<" ";};
+                
+            };
+
+            if(!(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)-dimY)<= 12))cout <<" ";
+        };
+         cout <<endl;
+        for(int y=dimY-1;y>=0;y--){
+            if(apolito(get<0>(Self_Driving_Car_pos)+1)+apolito(get<1>(Self_Driving_Car_pos)-y)<= 12){
+                if(direction== Direction::NORTH)cout <<" ";
+                if(direction== Direction::EAST){cout <<" ";};
+                if(direction== Direction::WEST){
+                    if((get<1>(Self_Driving_Car_pos)==y))cout <<"X";
+                    if(!(get<1>(Self_Driving_Car_pos)==y))cout <<" ";
+                };
+                if(direction== Direction::SOUTH){cout <<" ";};
+                
+            };
+            if(!(apolito(get<0>(Self_Driving_Car_pos)+1)+apolito(get<1>(Self_Driving_Car_pos)-y)<= 12))cout <<" ";
+            for(int x=0;x<dimX;x++){
+            if(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)-y)<= 12){
+                if(!((get<0>(Self_Driving_Car_pos)==x)&&(get<1>(Self_Driving_Car_pos)==y))){
+                    bool in=false;
+                    if(direction== Direction::NORTH){
+                    if((get<1>(Self_Driving_Car_pos)>=y)&&(get<0>(Self_Driving_Car_pos)==x))in=true;
+                    if(!((get<1>(Self_Driving_Car_pos)>=y)&&(get<0>(Self_Driving_Car_pos)==x)))cout <<" ";
+                };
+                if(direction== Direction::EAST){
+                    if((get<1>(Self_Driving_Car_pos)==y)&&(get<0>(Self_Driving_Car_pos)>=x))in=true;
+                    if(!((get<1>(Self_Driving_Car_pos)==y)&&(get<0>(Self_Driving_Car_pos)>=x)))cout <<" ";
+                };
+                if(direction== Direction::WEST){
+                    if((get<1>(Self_Driving_Car_pos)==y)&&(get<0>(Self_Driving_Car_pos)<=x))in=true;
+                    if(!((get<1>(Self_Driving_Car_pos)==y)&&(get<0>(Self_Driving_Car_pos)<=x)))cout <<" ";
+                };
+                if(direction== Direction::SOUTH){
+                    if((get<1>(Self_Driving_Car_pos)<=y)&&(get<0>(Self_Driving_Car_pos)==x))in=true;
+                    if(!((get<1>(Self_Driving_Car_pos)<=y)&&(get<0>(Self_Driving_Car_pos)==x)))cout <<" ";
+                };
+                if(in==true){
+                    if(GridWorld[x][y].size()==0)cout <<'.';
+                    if(GridWorld[x][y].size()>=2)cout <<"(";
+                    for(int f=0;f<GridWorld[x][y].size();f++){
+                        cout <<(GridWorld[x][y])[f]->GET_glyph();
+                    };
+                    if(GridWorld[x][y].size()>=2)cout<<")";
+                };
+                };
+                if(((get<0>(Self_Driving_Car_pos)==x)&&(get<1>(Self_Driving_Car_pos)==y))){
+                if(GridWorld[x][y].size()>=1)cout <<"(";
+                 cout <<Self_Driving_Car_glyph;
+                for(int f=0;f<GridWorld[x][y].size();f++){
+                    cout <<(GridWorld[x][y])[f]->GET_glyph();
+                };
+                if(GridWorld[x][y].size()>=1)cout<<")";
+                };
+            };
+            if(!(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)-y)<= 12))cout <<" ";
+            };
+            
+            if(apolito(get<0>(Self_Driving_Car_pos)-dimX)+apolito(get<1>(Self_Driving_Car_pos)-y)<= 12){
+                if(direction== Direction::NORTH)cout <<" ";
+                if(direction== Direction::EAST){cout <<" ";};
+                if(direction== Direction::WEST){
+                    if((get<1>(Self_Driving_Car_pos)==y))cout <<"X";
+                    if(!(get<1>(Self_Driving_Car_pos)==y))cout <<" ";
+                };
+                if(direction== Direction::SOUTH){cout <<" ";};
+                
+            };
+            if(!(apolito(get<0>(Self_Driving_Car_pos)-dimX)+apolito(get<1>(Self_Driving_Car_pos)-y)<= 12))cout <<" ";
+            cout <<endl;
+        };
+        for(int x=-1;x<dimX+1;x++){
+            if(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)+1)<= 12){
+                if(direction== Direction::NORTH){
+                    if((get<0>(Self_Driving_Car_pos)==x))cout <<"X";
+                    if(!(get<0>(Self_Driving_Car_pos)==x))cout <<" ";
+                };
+                if(direction== Direction::EAST){cout <<" ";};
+                if(direction== Direction::WEST){cout <<" ";};
+                if(direction== Direction::SOUTH){cout <<" ";};
+                
+            };
+            if(!(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)+1)<= 12))cout <<" ";
+        };
+        cout <<endl;
+
+
+    };
 GridWorld::~GridWorld(){
         for(int i=0 ; i<numMovingCars ; i++){
             delete MovingCar[i];
