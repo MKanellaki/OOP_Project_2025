@@ -182,7 +182,6 @@ vector<WorldObject*> GridWorld::get_GridWorld()const{
         return GridWorld;
 };
     void GridWorld::visualization_pov(tuple<int, int> Self_Driving_Car_pos,string Self_Driving_Car_glyph,int radius){
-        cout <<endl;
                 vector<WorldObject*> GridWorld[dimX][dimY];
         for(int i=0 ; i<numMovingCars ; i++){
             if(MovingCar[i]->get_in())GridWorld[MovingCar[i]->get_x_pos()][MovingCar[i]->get_y_pos()].push_back(MovingCar[i]);
@@ -199,10 +198,14 @@ vector<WorldObject*> GridWorld::get_GridWorld()const{
         for(int i=0 ; i<numTraficLights ; i++){
             GridWorld[TrafficLight[i]->get_x_pos()][TrafficLight[i]->get_y_pos()].push_back(TrafficLight[i]); 
         };
-         for(int x=0;x<dimX+2;x++){if(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)-dimY)<=radius)cout <<"X";};
+         for(int x=-1;x<dimX+1;x++){
+            if(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)-dimY)<=radius)cout <<"X";
+            if(!(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)-dimY)<=radius))cout <<" ";
+        };
          cout <<endl;
         for(int y=dimY-1;y>=0;y--){
             if(apolito(get<0>(Self_Driving_Car_pos)+1)+apolito(get<1>(Self_Driving_Car_pos)-y)<=radius)cout <<"X";
+            if(!(apolito(get<0>(Self_Driving_Car_pos)+1)+apolito(get<1>(Self_Driving_Car_pos)-y)<=radius))cout <<" ";
             for(int x=0;x<dimX;x++){
             if(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)-y)<=radius){
                 if(!((get<0>(Self_Driving_Car_pos)==x)&&(get<1>(Self_Driving_Car_pos)==y))){
@@ -222,11 +225,15 @@ vector<WorldObject*> GridWorld::get_GridWorld()const{
                 if(GridWorld[x][y].size()>=1)cout<<")";
                 };
             };
+            if(!(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)-y)<=radius))cout <<" ";
             };
             if(apolito(get<0>(Self_Driving_Car_pos)-dimX)+apolito(get<1>(Self_Driving_Car_pos)-y)<=radius)cout <<"X";
+            if(!(apolito(get<0>(Self_Driving_Car_pos)-dimX)+apolito(get<1>(Self_Driving_Car_pos)-y)<=radius))cout <<" ";
             cout <<endl;
         };
-        for(int x=0;x<dimX+2;x++){if(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)+1)<=radius)cout <<"X";};
+        for(int x=-1;x<dimX+1;x++){if(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)+1)<=radius)cout <<"X";
+            if(!(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)+1)<=radius))cout <<" ";
+        };
         cout <<endl;
 
 
