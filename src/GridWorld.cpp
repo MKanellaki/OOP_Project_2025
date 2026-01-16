@@ -199,10 +199,10 @@ vector<WorldObject*> GridWorld::get_GridWorld(){
         for(int i=0 ; i<numTraficLights ; i++){
             GridWorld[TrafficLight[i]->get_x_pos()][TrafficLight[i]->get_y_pos()].push_back(TrafficLight[i]); 
         };
-         for(int x=0;x<dimX+2;x++){cout <<"X";};
+         for(int x=0;x<dimX+2;x++){if(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)-dimY)<=radius)cout <<"X";};
          cout <<endl;
         for(int y=dimY-1;y>=0;y--){
-            cout <<"X";
+            if(apolito(get<0>(Self_Driving_Car_pos)+1)+apolito(get<1>(Self_Driving_Car_pos)-y)<=radius)cout <<"X";
             for(int x=0;x<dimX;x++){
             if(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)-y)<=radius){
                 if(!((get<0>(Self_Driving_Car_pos)==x)&&(get<1>(Self_Driving_Car_pos)==y))){
@@ -223,10 +223,10 @@ vector<WorldObject*> GridWorld::get_GridWorld(){
                 };
             };
             };
-            cout <<"X";
+            if(apolito(get<0>(Self_Driving_Car_pos)-dimX)+apolito(get<1>(Self_Driving_Car_pos)-y)<=radius)cout <<"X";
             cout <<endl;
         };
-        for(int x=0;x<dimX+2;x++){cout <<"X";};
+        for(int x=0;x<dimX+2;x++){if(apolito(get<0>(Self_Driving_Car_pos)-x)+apolito(get<1>(Self_Driving_Car_pos)+1)<=radius)cout <<"X";};
         cout <<endl;
 
 
