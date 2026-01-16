@@ -3,7 +3,7 @@
         if(x<0)return -x;
         return x;
     };
-    int GridWorld::get_seed(){
+    int GridWorld::get_seed()const{
         return seed;
     }; 
     void GridWorld::set_seed(int NEWseed){
@@ -18,7 +18,7 @@
     void GridWorld::set_simulationTicks(int NEWsimulationTicks){
         simulationTicks = NEWsimulationTicks;
     };
-    int GridWorld::get_simulationTicks(){
+    int GridWorld::get_simulationTicks()const{
         return simulationTicks;
     };
     void GridWorld::set_numMovingCars(int NEWnumMovingCars){
@@ -162,7 +162,7 @@ void GridWorld::NEW_tick(){
         TrafficLight[i]->new_cycle();   
      };
 };
-vector<WorldObject*> GridWorld::get_GridWorld(){
+vector<WorldObject*> GridWorld::get_GridWorld()const{
         vector<WorldObject*> GridWorld;
         for(int i=0 ; i<numMovingCars ; i++){
             if(MovingCar[i]->get_in())GridWorld.push_back(MovingCar[i]);
