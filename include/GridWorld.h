@@ -47,6 +47,7 @@ public:
     void visualization_pov(tuple<int, int> Self_Driving_Car_pos,char Self_Driving_Car_glyph,int radius);
     //prints the world around the vehicle based on the radius
     void visualization_pov_front(tuple<int, int> Self_Driving_Car_pos,char Self_Driving_Car_glyph,CarDirection direction);
+    //prints the cells in front of the car's field of vision
     void NEW_tick();
     //it’s called for every tick to update the objects
     vector<WorldObject*> get_GridWorld()const;
