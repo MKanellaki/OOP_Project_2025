@@ -8,7 +8,7 @@ OBJ_DIR := obj
 
 # Files
 SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
-MAIN_FILE := temp.cpp
+MAIN_FILE := simulation.cpp
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 MAIN_OBJ := $(OBJ_DIR)/simulation.o
 

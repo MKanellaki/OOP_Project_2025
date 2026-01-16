@@ -84,7 +84,7 @@ At each tick:
 
 1. **World Objects Update**
 
-   * Moving vehicles update position based on speed and direction
+   * Moving vehicles update position based on speed and direction with a chance of changing direction
    * Traffic lights update their internal state
    * Static objects remain unchanged
 
