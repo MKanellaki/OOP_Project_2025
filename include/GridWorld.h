@@ -42,9 +42,10 @@ public:
     void set_numTraficLights(int NEWnumTraficLights);
     void create_GridWorld();//must be called after the sets (if used) and before the
     // (first_tick,NEW_tick,get_GridWorld) so that it can set up everything
-    void first_tick(tuple<int, int> Self_Driving_Car_pos,string Self_Driving_Car_glyph);
+    void visualization_full(tuple<int, int> Self_Driving_Car_pos,string Self_Driving_Car_glyph);
+    void visualization_pov(tuple<int, int> Self_Driving_Car_pos,string Self_Driving_Car_glyph,int radius);
     // must be called for the first tick(print the world)
-    void NEW_tick(tuple<int, int> Self_Driving_Car_pos,string Self_Driving_Car_glyph);
+    void NEW_tick();
     //it’s called for every other tick except the first one (print the world)
     vector<WorldObject*> get_GridWorld();
     //it returns a vector with all the Objects
