@@ -28,12 +28,12 @@ public:
     GridWorld():dimX(40),dimY(40),simulationTicks(100),numMovingCars(3),numMovingBikes(4),
     numParkedCars(5),numStopSigns(2),numSigns(2),numTraficLights(2),seed(time(NULL)){};
     // It setups the variables with the default ones
-    int get_seed(); //Every get_.... return the corresponding variable
+    int get_seed()const; //Every get_.... return the corresponding variable
     void set_seed(int NEWseed);//Every set_.... changes the corresponding variable
     void set_dimX(int NEWdimX);
     void set_dimY(int NEWdimY);
     void set_simulationTicks(int NEWsimulationTicks);
-    int get_simulationTicks();
+    int get_simulationTicks() const;
     void set_numMovingCars(int NEWnumMovingCars);
     void set_numMovingBikes(int NEWnumMovingBikes);
     void set_numParkedCars(int NEWnumParkedCars);
@@ -47,7 +47,7 @@ public:
     // must be called for the first tick(print the world)
     void NEW_tick();
     //it’s called for every other tick except the first one (print the world)
-    vector<WorldObject*> get_GridWorld();
+    vector<WorldObject*> get_GridWorld()const;
     //it returns a vector with all the Objects
     ~GridWorld();
 };
