@@ -6,8 +6,8 @@ protected:
     static int ParkedCarcount;
 public:
     StationaryVehicles(){
-        ParkedCarcount++;
-        glyph="P";
+        ParkedCarcount++;//counts the objects that exist of tha type
+        glyph="P";//sets everything with the necessary variables
         ID.ID_string="ParkedCar:";
         Type=ObjectType::PARKED_CAR;
         ID.ID_int=ParkedCarcount;

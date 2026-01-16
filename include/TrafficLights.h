@@ -7,15 +7,15 @@ static int TrafficLightscount;
 int ticks;
 public:
 TrafficLights():ticks(1){
-    TrafficLightscount++;
-    glyph="R";
+    TrafficLightscount++;//counts the objects that exist of tha type
+    glyph="R";//sets everything with the necessary variables
     ID.ID_string="TrafficLights:";
     Type=ObjectType::TRAFFIC_LIGHT;
     ID.ID_int=TrafficLightscount;
 };
 void new_cycle(){
-    ticks++;
-    if((glyph=="R")&&(ticks>4)){
+    ticks++;//increases ticks
+    if((glyph=="R")&&(ticks>4)){//updates the color based on the ticks and the next color
         glyph="G";
         ticks=1;
     };
@@ -25,7 +25,7 @@ void new_cycle(){
     };
     if((glyph=="Y")&&(ticks>2)){
         glyph="R";
-        ticks=0;
+        ticks=1;
     };
 };
 void describe()override{

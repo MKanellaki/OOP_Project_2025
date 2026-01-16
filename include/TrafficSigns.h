@@ -9,21 +9,21 @@ static int TrafficSignscount;
 string writtenSigns;
 public:
 TrafficSigns(bool STOP):is_STOP(STOP){
-    if(is_STOP){
-    TrafficSignsSTOPcount++;
-    glyph="S";
+    if(is_STOP){//checks if it is (stop) or not
+    TrafficSignsSTOPcount++;//counts the objects that exist of tha type (stop)
+    glyph="S";//sets everything with the necessary variables
     ID.ID_string="TrafficSignStop:";
     Type=ObjectType::STOP_SIGN;
     ID.ID_int=TrafficSignsSTOPcount;
     writtenSigns="STOP";
 };
-    if(!is_STOP){
-    TrafficSignscount++;
-    glyph="?";
+    if(!is_STOP){//checks if it is (stop) or not
+    TrafficSignscount++;//counts the objects that exist of tha type (not stop)
+    glyph="?";//sets everything with the necessary variables
     ID.ID_string="TrafficSign:";
     Type=ObjectType::SIGN;
     ID.ID_int=TrafficSignscount;
-    int f =rand()%(4);
+    int f =rand()%(4);//gets a random number and puts a message based on it
         if (f==0)writtenSigns="ΕΚΠΑ";
         if (f==1)writtenSigns="ΑΘΗΝΑ";
         if (f==2)writtenSigns="ΜΕΣΗ ΤΟΥ ΠΟΥΘΕΝΑ";
