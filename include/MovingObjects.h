@@ -13,7 +13,7 @@ bool get_in(){
     void not_in(){
         in= false;
     };
-string get_direction(){
+string get_direction() const{
         return direction;
     };
     void move(){

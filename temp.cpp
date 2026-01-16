@@ -5,20 +5,6 @@
 #include "include/selfDrivingCar.h"
 #include "include/navigationSystem.h"
 
-#include "TrafficLights.h"
-#include "StationaryVehicles.h"
-#include "TrafficSigns.h"
-#include "MovingBikes.h"
-#include "MovingCars.h"
-
-int TrafficLights::TrafficLightscount = 0;
-int StationaryVehicles::ParkedCarcount = 0;
-int TrafficSigns::TrafficSignscount = 0;
-int TrafficSigns::TrafficSignsSTOPcount = 0;
-int MovingBikes::MovingBikescount = 0;
-int MovingCars::MovingCarscount = 0;
-
-
 int main(){
     GridWorld world;
     world.set_dimX(10);
@@ -60,9 +46,11 @@ int main(){
 
         car.move();
 
-        if(t==0)
-            world.first_tick(car.get_position(), string(1,car.get_glyph()));
-        else
-            world.NEW_tick(car.get_position(), string(1,car.get_glyph()));
+        if(t==0){
+            world.visualization_full(car.get_position(), car.get_glyph());
+        }else{
+            world.NEW_tick();
+            world.visualization_pov(car.get_position(), car.get_glyph(), 5);
+        }
     }
 }

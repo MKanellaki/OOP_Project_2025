@@ -43,5 +43,7 @@ tuple<int, int> getPosition() const{
 ObjectType getType() const{
 return Type;
 };
+
+virtual ~WorldObject() = default;
 };
 #endif

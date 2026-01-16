@@ -3,7 +3,6 @@
 
 #include <tuple>
 #include <string>
-using namespace std;
 
 enum class ObjectType{
     MOVING_CAR,
@@ -32,12 +31,12 @@ enum class Direction{
 struct SensorReading{
     ObjectType type; //lidar
     int distance; //lidar,radar
-    tuple<int, int> position;
-    string objectID;
+    std::tuple<int, int> position;
+    std::string objectID;
     float confidence; //lidar,radar
     int speed; //radar
     Direction direction; //radar
-    string signText;//camera
+    std::string signText;//camera
     TrafficLightColor trafficLight;//camera
 };
 

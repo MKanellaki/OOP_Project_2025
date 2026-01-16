@@ -9,7 +9,7 @@ class LidarSensor : public Sensor{
         SensorReading createReading(const WorldObject& object, int distance) const override;
     public:
         LidarSensor();
-        ~LidarSensor();
+        ~LidarSensor() override = default;
 
         std::vector<SensorReading> scan(const GridWorld& world) override;
 };

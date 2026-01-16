@@ -12,7 +12,7 @@ class NavigationSystem{
 private:
     SensorFusionEngine fusion;
     std::vector<std::tuple<int,int>> gpsTargets;//multiple targets?
-    int currentTargetIndex;
+    size_t currentTargetIndex;
 
     std::vector<SensorReading> fusedWorld;
 

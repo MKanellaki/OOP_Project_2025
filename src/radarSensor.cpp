@@ -4,7 +4,6 @@
 using namespace std;
 
 RadarSensor::RadarSensor() : Sensor(12, 0.95f) {}
-RadarSensor::~RadarSensor() {}
 
 vector<SensorReading> RadarSensor::scan(const GridWorld& world){
     vector<SensorReading> readings;
@@ -25,6 +24,7 @@ vector<SensorReading> RadarSensor::scan(const GridWorld& world){
             int dx = ox - sx;
             int dy = oy - sy;
 
+            //check if object is infront
             bool inFront = false;
             if (direction == CarDirection::NORTH && dy > 0 && dx == 0){
                 inFront = true;
@@ -60,17 +60,26 @@ SensorReading RadarSensor::createReading(const WorldObject& obj, int distance) c
     reading.objectID = obj.getID();
     reading.confidence = addNoise(accuracy * confidenceFromDistance(distance));
 
+    //speed
     if(reading.type == ObjectType::MOVING_CAR){
         reading.speed = 2;
     }else{
         reading.speed = 1;
     }
 
+    //direction
     if (auto* moving = dynamic_cast<const MovingObjects*>(&obj)){
-        if (moving->get_direction() == "left") reading.direction = Direction::WEST;
-        else if (moving->get_direction() == "right") reading.direction = Direction::EAST;
-        else if (moving->get_direction() == "up") reading.direction = Direction::NORTH;
-        else if (moving->get_direction() == "down") reading.direction = Direction::SOUTH;
+        if(moving->get_direction() == "left"){
+            reading.direction = Direction::WEST;
+        }else if(moving->get_direction() == "right"){
+            reading.direction = Direction::EAST;
+        }else if(moving->get_direction() == "up"){
+            reading.direction = Direction::NORTH;
+        }else if(moving->get_direction() == "down"){
+            reading.direction = Direction::SOUTH;
+        }
+    }else{
+        reading.direction = Direction::UNKNOWN;
     }
 
     //radar doesn't know these

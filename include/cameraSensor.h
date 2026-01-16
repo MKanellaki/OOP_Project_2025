@@ -10,7 +10,7 @@ protected:
 
 public:
     CameraSensor();
-    ~CameraSensor();
+    ~CameraSensor() override = default;
 
     std::vector<SensorReading> scan(const GridWorld& world) override;
 };

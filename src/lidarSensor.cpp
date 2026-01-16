@@ -3,8 +3,6 @@ using namespace std;
 
 LidarSensor::LidarSensor():Sensor(9, 0.99f){} 
 
-LidarSensor::~LidarSensor(){}
-
 vector<SensorReading> LidarSensor::scan(const GridWorld& world){
     vector<SensorReading> readings;
 
