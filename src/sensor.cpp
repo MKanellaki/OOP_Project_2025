@@ -23,7 +23,7 @@ float Sensor::confidenceFromDistance(int distance) const{
 }
 
 float Sensor::addNoise(float confidence) const{
-    float noise = ((rand() % 100) / 1000.0f) - 0.05f; // [-0.05, +0.05]
+    float noise = ((rand() % 100) / 1000.0f) - 0.05f; //[-0.05, +0.05]
     float noisy = confidence + noise;
     if (noisy < 0.0f) noisy = 0.0f;
     if (noisy > 1.0f) noisy = 1.0f;

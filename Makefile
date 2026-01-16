@@ -13,7 +13,7 @@ OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 MAIN_OBJ := $(OBJ_DIR)/simulation.o
 
 # Output
-TARGET := oop_sim
+TARGET :=  oopproj_2025
 
 # Default target
 all: $(TARGET)

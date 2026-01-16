@@ -78,10 +78,18 @@ void SelfDrivingCar::move(){
     auto [x, y] = position;
 
     switch(direction){
-        case CarDirection::NORTH: y += step; break;
-        case CarDirection::SOUTH: y -= step; break;
-        case CarDirection::EAST:  x += step; break;
-        case CarDirection::WEST:  x -= step; break;
+        case CarDirection::NORTH: 
+            y += step; 
+            break;
+        case CarDirection::SOUTH: 
+            y -= step; 
+            break;
+        case CarDirection::EAST:  
+            x += step; 
+            break;
+        case CarDirection::WEST: 
+            x -= step; 
+            break;
     }
 
     position = make_tuple(x, y);
