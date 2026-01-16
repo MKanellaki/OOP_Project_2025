@@ -24,6 +24,11 @@ string get_direction(){
         if (direction=="up")y=y+speed;
         if (direction=="down")y=y-speed;
         add_pos(x,y);
+        int f =rand()%(4);
+        if (f==0)direction="left";
+        if (f==1)direction="right";
+        if (f==2)direction="up";
+        if (f==3)direction="down";
     };
 }; 
 #endif
