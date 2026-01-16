@@ -168,8 +168,8 @@ int main(int argc, char* argv[]){
             world.visualization_full(car.get_position(), car.get_glyph());
         }else{
             //change comment for different area
-            //world.visualization_pov(car.get_position(), car.get_glyph(), 5);
-            world.visualization_pov_front(car.get_position(), car.get_glyph(), car.get_direction());
+            world.visualization_pov(car.get_position(), car.get_glyph(), 5);
+            //world.visualization_pov_front(car.get_position(), car.get_glyph(), car.get_direction());
         }
     }
 

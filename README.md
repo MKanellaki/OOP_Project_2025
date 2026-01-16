@@ -1,9 +1,7 @@
-# title goes here
+# Self Driving Car GPS Navigation System
 
 
 ## Authors
-
-OOP Project 2025
 
 ```
 Κανελλάκη Μαρία sdi2300060
@@ -11,7 +9,11 @@ OOP Project 2025
 ```
 
 ## Overview
-write here
+This project was made for the 2025 Object-Oriented Programming Course of the University of Athens.
+
+This project implements a discrete-time simulation of an autonomous vehicle navigating a 2D grid world. The simulation models static and dynamic world objects, multiple sensors with noise, sensor fusion, and a navigation system that guides the vehicle toward one or more GPS targets while reacting to obstacles and traffic infrastructure. 
+
+The simulation progresses in discrete ticks, where all entities update their state simultaneously.
 
 ---
 

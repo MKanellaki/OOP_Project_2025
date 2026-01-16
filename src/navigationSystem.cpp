@@ -32,24 +32,22 @@ bool NavigationSystem::isAhead(const SelfDrivingCar& car, const SensorReading& r
 }
 
 void NavigationSystem::makeDecision(SelfDrivingCar& car) {
-    if (currentTargetIndex >= gpsTargets.size())
-        return; // no more targets
+    if(currentTargetIndex >= gpsTargets.size()){
+        return; //no more targets
+    }
 
     auto [cx, cy] = car.get_position();
     auto [tx, ty] = gpsTargets[currentTargetIndex];
 
     int distanceToTarget = abs(tx - cx) + abs(ty - cy);
 
-    // 1. Check world hazards
-    for (const auto& r : fusedWorld) {
-        if (!isAhead(car, r))
+    //check for world objects
+    for(const auto& r : fusedWorld){
+        if(!isAhead(car, r))
             continue;
 
-        // STOP conditions
-        if ((r.type == ObjectType::TRAFFIC_LIGHT &&
-             (r.trafficLight == TrafficLightColor::RED ||
-              r.trafficLight == TrafficLightColor::YELLOW)) &&
-            r.distance <= 3) {
+        //stop conditions
+        if((r.type == ObjectType::TRAFFIC_LIGHT && (r.trafficLight == TrafficLightColor::RED || r.trafficLight == TrafficLightColor::YELLOW)) && r.distance <= 3){
             car.set_speed(SpeedState::STOPPED);
             return;
         }
@@ -59,29 +57,35 @@ void NavigationSystem::makeDecision(SelfDrivingCar& car) {
             return;
         }
 
-        // Slow down for obstacles
-        if ((r.type == ObjectType::MOVING_CAR ||
-             r.type == ObjectType::MOVING_BIKE) &&
-            r.distance <= 2) {
+        //slow down conditions
+        if((r.type == ObjectType::MOVING_CAR || r.type == ObjectType::MOVING_BIKE) && r.distance <= 2){
             car.decelerate();
             return;
         }
     }
 
-    // 2. GPS proximity slowing
-    if (distanceToTarget <= 5) {
+    //slow if close to target
+    if(distanceToTarget <= 5){
         car.decelerate();
-    } else {
+    }else{
         car.accelerate();
     }
 
-    // 3. Direction toward target
-    if (cx != tx) {
-        car.set_direction((tx > cx) ? CarDirection::EAST : CarDirection::WEST);
-    } else if (cy != ty) {
-        car.set_direction((ty > cy) ? CarDirection::NORTH : CarDirection::SOUTH);
-    } else {
-        // Arrived at target
+    //move torwards target
+    if(cx != tx){
+        if (tx > cx) {
+            car.set_direction(CarDirection::EAST);
+        } else {
+            car.set_direction(CarDirection::WEST);
+        }
+    }else if(cy != ty) {
+        if (ty > cy) {
+            car.set_direction(CarDirection::NORTH);
+        } else {
+            car.set_direction(CarDirection::SOUTH);
+        }
+    }else{
+        //arrived at target
         currentTargetIndex++;
     }
 }
