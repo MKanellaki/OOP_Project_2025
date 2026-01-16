@@ -36,6 +36,4 @@ void describe()override{
        if(!is_STOP)cout <<"NOT STOP \n"<<endl;
     };
 };
-int TrafficSigns::TrafficSignsSTOPcount=0;
-int TrafficSigns::TrafficSignscount=0;
 #endif

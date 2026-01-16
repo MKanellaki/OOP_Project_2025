@@ -20,7 +20,7 @@ int X;//οριζόντιος άξονας
 int Y;//κάθ ετος άξονας
 ObjectType Type;
 public:
-string GET_glyph(){//Every get_.... return the corresponding variable
+string GET_glyph() const{//Every get_.... return the corresponding variable
    return glyph;
 };
 virtual void describe(){};
@@ -28,19 +28,19 @@ void add_pos(int x,int y){//adds position
     X=x;
     Y=y;
 };
-int get_x_pos(){
+int get_x_pos() const{
     return X;
 };
-int get_y_pos(){
+int get_y_pos() const{
     return Y;
 };
-string getID(){
+string getID() const{
     return ID.ID_string;
 };
-tuple<int, int> getPosition(){
+tuple<int, int> getPosition() const{
     return make_tuple(X,Y);
 };
-ObjectType getType(){
+ObjectType getType() const{
 return Type;
 };
 };

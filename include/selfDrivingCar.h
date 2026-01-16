@@ -11,38 +11,40 @@ enum class SpeedState{
     FULL_SPEED
 };
 
-enum class Direction{
+enum class CarDirection{
     NORTH,
     EAST,
     WEST,
-    SOUTH
+    SOUTH,
 };
 
 class SelfDrivingCar{
     private:
         SpeedState speed;
-        Direction direction;
+        CarDirection direction;
         tuple<int, int> position;
         char glyph;
     public:
 
-        SelfDrivingCar(int x, int y, Direction dir);
+        SelfDrivingCar(int x, int y, CarDirection dir);
         SelfDrivingCar();
         ~SelfDrivingCar();
 
         //setters
         void set_speed(SpeedState spd);
-        void set_direction(Direction dir);
+        void set_direction(CarDirection dir);
         void set_position(int x, int y);
 
         //getters
         SpeedState get_speed() const;
-        Direction get_direction() const;
+        CarDirection get_direction() const;
         tuple<int, int> get_position() const;
+        char get_glyph() const;
 
-        void accelarate();
-        void decelarate();
-        void turn();
+        void accelerate();
+        void decelerate();
+        
+        void move();
 };
 
 #endif

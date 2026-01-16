@@ -25,5 +25,4 @@ class MovingCars : public MovingObjects{
        cout <<direction <<"\n"<<endl;
     };
 };
-int MovingCars::MovingCarscount=0;
 #endif

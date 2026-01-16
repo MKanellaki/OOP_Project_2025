@@ -17,19 +17,28 @@ enum class ObjectType{
 enum class TrafficLightColor{
     RED,
     YELLOW,
-    GREEN
+    GREEN,
+    UNKNOWN
+};
+
+enum class Direction{
+    NORTH,
+    EAST,
+    WEST,
+    SOUTH,
+    UNKNOWN
 };
 
 struct SensorReading{
-    ObjectType type;
-    int distance;
+    ObjectType type; //lidar
+    int distance; //lidar,radar
     tuple<int, int> position;
     string objectID;
-    float confidence;
-    int speed;
-    string direction;
-    string signText;
-    TrafficLightColor trafficLight;
+    float confidence; //lidar,radar
+    int speed; //radar
+    Direction direction; //radar
+    string signText;//camera
+    TrafficLightColor trafficLight;//camera
 };
 
 #endif

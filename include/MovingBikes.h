@@ -1,4 +1,4 @@
-#ifndef MOVINGBIKRS_H
+#ifndef MOVINGBIKES_H
 #define MOVINGBIKES_H
 #include "MovingObjects.h"
 class MovingBikes : public MovingObjects{
@@ -24,5 +24,4 @@ MovingBikes(){
        cout <<direction <<"\n"<<endl;
     };
 };
-int MovingBikes::MovingBikescount=0;
 #endif
