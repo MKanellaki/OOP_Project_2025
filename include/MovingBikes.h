@@ -6,14 +6,14 @@ class MovingBikes : public MovingObjects{
     static int MovingBikescount;
     public:
 MovingBikes(){
-        MovingBikescount++;
-        in =true;
+        MovingBikescount++;//counts the objects that exist of tha type
+        in =true;//sets everything with the necessary variables
         glyph="B";
         ID.ID_string="MovingBike:";
         Type=ObjectType::MOVING_BIKE;
         ID.ID_int=MovingBikescount;
         speed=1;
-        int f =rand()%(4);
+        int f =rand()%(4);//gets a random number and puts a direction based on it
         if (f==0)direction="left";
         if (f==1)direction="right";
         if (f==2)direction="up";

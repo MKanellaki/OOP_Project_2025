@@ -7,7 +7,7 @@ class MovingCars : public MovingObjects{
     public:
     MovingCars(){
         MovingCarscount++;//counts the objects that exist of tha type
-        in =true;//sets everything with the default variables
+        in =true;//sets everything with the necessary variables
         glyph ="C";
         ID.ID_string="MovingCar:";
         Type=ObjectType::MOVING_CAR ;
