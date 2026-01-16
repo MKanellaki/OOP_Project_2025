@@ -16,8 +16,8 @@ class WorldObject{
 protected:
 ID_class ID;
 string glyph;
-int X;//οριζόντιος άξονας 
-int Y;//κάθ ετος άξονας
+int X;//horizontal axis
+int Y;//vertical axis
 ObjectType Type;
 public:
 string GET_glyph() const{//Every get_.... return the corresponding variable
