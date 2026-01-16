@@ -1,10 +1,10 @@
 #ifndef GRIDWORLD_H
 #define GRIDWORLD_H
+#include "selfDrivingCar.h"
 #include "TrafficLights.h"
 #include "StationaryVehicles.h"
 #include "TrafficSigns.h"
 #include "MovingBikes.h"
-#include "MovingCars.h"
 #include "MovingCars.h"
 using namespace std;
 class GridWorld{
@@ -41,12 +41,14 @@ public:
     void set_numSigns(int NEWnumSigns);
     void set_numTraficLights(int NEWnumTraficLights);
     void create_GridWorld();//must be called after the sets (if used) and before the
-    // (first_tick,NEW_tick,get_GridWorld) so that it can set up everything
+    // (visualization_full,visualization_pov,NEW_tick,get_GridWorld) so that it can set up everything
     void visualization_full(tuple<int, int> Self_Driving_Car_pos,string Self_Driving_Car_glyph);
+    //prints the complete world in a grid
     void visualization_pov(tuple<int, int> Self_Driving_Car_pos,string Self_Driving_Car_glyph,int radius);
-    // must be called for the first tick(print the world)
+    //prints the world around the vehicle based on the radius
+    void visualization_pov_front(tuple<int, int> Self_Driving_Car_pos,string Self_Driving_Car_glyph,Direction direction);
     void NEW_tick();
-    //it’s called for every other tick except the first one (print the world)
+    //it’s called for every tick to update the objects
     vector<WorldObject*> get_GridWorld()const;
     //it returns a vector with all the Objects
     ~GridWorld();
