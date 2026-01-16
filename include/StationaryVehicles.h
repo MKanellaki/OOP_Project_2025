@@ -16,5 +16,4 @@ void describe()override{
        cout <<"StationaryVehicles \n"<<endl;
     };
 };
-int StationaryVehicles::ParkedCarcount=0;
 #endif

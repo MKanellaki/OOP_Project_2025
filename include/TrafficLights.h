@@ -35,5 +35,4 @@ void describe()override{
        if(glyph=="G")cout <<"GREEN \n"<<endl;
     };
 };
-int TrafficLights::TrafficLightscount=0;
 #endif
