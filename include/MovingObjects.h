@@ -19,8 +19,8 @@ string get_direction(){
     void move(){
         int x=get_x_pos();
         int y=get_y_pos();
-        if (direction=="left")x=x+speed;
-        if (direction=="right")x=x-speed;
+        if (direction=="left")x=x-speed;
+        if (direction=="right")x=x+speed;
         if (direction=="up")y=y+speed;
         if (direction=="down")y=y-speed;
         add_pos(x,y);
